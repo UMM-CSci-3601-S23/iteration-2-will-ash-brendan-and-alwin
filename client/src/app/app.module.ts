@@ -30,6 +30,9 @@ import { RequestDonorComponent } from './requests/request-donor.component';
 import { RequestVolunteerComponent } from './requests/request-volunteer.component';
 import { NewRequestComponent } from './requests/new-request/new-request.component';
 import { EditRequestComponent } from './requests/edit-request.component';
+import { RouterModule } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 
 
 
@@ -60,6 +63,8 @@ const MATERIAL_MODULES: any[] = [
     RequestDonorComponent,
     RequestVolunteerComponent,
     EditRequestComponent,
+    LoginComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,6 +75,10 @@ const MATERIAL_MODULES: any[] = [
     HttpClientModule,
     MATERIAL_MODULES,
     LayoutModule,
+    RouterModule.forRoot([
+      { path: '', component: LoginComponent, pathMatch: 'full'},
+      { path: 'logout', component: LogoutComponent}
+    ])
   ],
   bootstrap: [AppComponent]
 })

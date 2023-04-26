@@ -1,0 +1,30 @@
+/* eslint-disable no-underscore-dangle */
+import { Component, NgZone, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+
+@Component({
+  selector: 'app-logout',
+  templateUrl: './logout.component.html',
+  styleUrls: ['./logout.component.scss']
+})
+export class LogoutComponent implements OnInit {
+
+  constructor(private router: Router,
+    private service: AuthService,
+    private _ngZone: NgZone) { }
+
+  ngOnInit(): void {
+  }
+
+  public logout() {
+    this.service.signOutExternal();
+    // we are going to use localstorage for the JWT token in teh browser,
+    // a future video will be about using cookies, token would be passed along with teh
+    // interceptor in teh request and sent to the API, but this would be used with an interceptor
+    this._ngZone.run(() => {
+      this.router.navigate(['/']).then(() => window.location.reload());
+    });
+  }
+
+}
